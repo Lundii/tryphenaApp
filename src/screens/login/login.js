@@ -1,11 +1,14 @@
-import React, {useState} from 'react';
+import React, {useState, useContext} from 'react';
 import {View, ImageBackground, StyleSheet} from 'react-native';
 import Input from '../../components/input';
 import Button from '../../components/button';
+import {AuthContext} from '../../context/authContext';
 
-export const Login = ({navigation}) => {
+const Login = ({navigation}) => {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
+  const [authState, authDispatch] = useContext(AuthContext);
+
   const handleEmailChange = emailText => {
     setEmail(emailText);
   };
@@ -29,10 +32,11 @@ export const Login = ({navigation}) => {
     })
       .then(response => response.json())
       .then(data => {
-        navigation.navigate('Home');
+        authDispatch({type: 'SIGNIN', token: 'whatawonderfultoken'});
         console.log(data);
       })
       .catch(error => {
+        navigation.navigate('Home');
         console.log('i am here');
         console.error(error);
       });
@@ -69,4 +73,5 @@ const styles = StyleSheet.create({
     height: '100%',
   },
 });
+
 export default Login;

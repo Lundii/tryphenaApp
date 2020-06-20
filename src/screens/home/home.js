@@ -1,6 +1,7 @@
 import React from 'react';
 import {View, Button} from 'react-native';
 import Allsites from '../allSites';
+import SiteCard from '../sitecards';
 import {createDrawerNavigator} from '@react-navigation/drawer';
 
 const Drawer = createDrawerNavigator();
@@ -26,7 +27,8 @@ function NotificationsScreen({navigation}) {
 
 const Home = () => {
   return (
-    <Drawer.Navigator initialRouteName="Allsites">
+    <Drawer.Navigator drawerStyle={{elevation: 5}} initialRouteName="Allsites" drawerType="front">
+      <Drawer.Screen name="SiteCards" component={SiteCard} />
       <Drawer.Screen name="Allsites" component={Allsites} />
       <Drawer.Screen name="Home" component={HomeScreen} />
       <Drawer.Screen name="Notifications" component={NotificationsScreen} />

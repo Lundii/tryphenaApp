@@ -11,13 +11,25 @@ const Site = ({title}) => {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#f9c2ff',
-    padding: 20,
+    backgroundColor: '#FFFFFF',
+    padding: 16,
+    height: 70,
     marginVertical: 8,
     marginHorizontal: 16,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 1,
+    },
+    shadowOpacity: 0.2,
+    shadowRadius: 1.41,
+
+    elevation: 2,
   },
   title: {
-    fontSize: 32,
+    fontSize: 16,
+    marginTop: 'auto',
+    textAlign: 'right',
   },
 });
 
