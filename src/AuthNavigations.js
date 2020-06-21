@@ -1,19 +1,19 @@
 import React from 'react';
 import {} from 'react-native';
-import {createStackNavigator} from '@react-navigation/stack';
+import {createDrawerNavigator} from '@react-navigation/drawer';
 import Login from './screens/login';
 
-const Stack = createStackNavigator();
+const Drawer = createDrawerNavigator();
 
 const AuthNavigations = () => {
   return (
-    <Stack.Navigator>
-      <Stack.Screen
+    <Drawer.Navigator>
+      <Drawer.Screen
         options={{headerShown: false}}
         name="Home"
         component={Login}
       />
-    </Stack.Navigator>
+    </Drawer.Navigator>
   );
 };
 

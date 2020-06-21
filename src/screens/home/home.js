@@ -1,38 +1,18 @@
 import React from 'react';
-import {View, Button} from 'react-native';
 import Allsites from '../allSites';
-import SiteCard from '../sitecards';
-import {createDrawerNavigator} from '@react-navigation/drawer';
+import SiteCards from '../sitecards';
+import SiteDetails from '../siteDetails';
+import {createStackNavigator} from '@react-navigation/stack';
 
-const Drawer = createDrawerNavigator();
-
-function HomeScreen({navigation}) {
-  return (
-    <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-      <Button
-        onPress={() => navigation.navigate('Notifications')}
-        title="Go to notifications"
-      />
-    </View>
-  );
-}
-
-function NotificationsScreen({navigation}) {
-  return (
-    <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-      <Button onPress={() => navigation.goBack()} title="Go back home" />
-    </View>
-  );
-}
+const Stack = createStackNavigator();
 
 const Home = () => {
   return (
-    <Drawer.Navigator drawerStyle={{elevation: 5}} initialRouteName="Allsites" drawerType="front">
-      <Drawer.Screen name="SiteCards" component={SiteCard} />
-      <Drawer.Screen name="Allsites" component={Allsites} />
-      <Drawer.Screen name="Home" component={HomeScreen} />
-      <Drawer.Screen name="Notifications" component={NotificationsScreen} />
-    </Drawer.Navigator>
+    <Stack.Navigator initialRouteName="Allsites">
+      <Stack.Screen name="Allsites" component={Allsites} />
+      <Stack.Screen name="SiteCards" component={SiteCards} />
+      <Stack.Screen name="SiteDetails" component={SiteDetails} />
+    </Stack.Navigator>
   );
 };
 

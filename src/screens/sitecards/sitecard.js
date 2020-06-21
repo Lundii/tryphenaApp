@@ -2,23 +2,23 @@ import React from 'react';
 import {View, StyleSheet, Text} from 'react-native';
 import Card from './card';
 
-const SiteCards = () => {
+const SiteCards = ({navigation}) => {
   return (
     <View style={styles.container}>
       <View style={styles.column}>
-        <Card title="Prelimary Instuctions" />
+        <Card title="Prelimary Instuctions" navigation={navigation} />
         <BlankElement />
-        <Card title="Site Details" />
+        <Card title="Site Details" navigation={navigation} />
       </View>
       <View style={styles.column}>
-        <Card title="Observations" />
+        <Card title="Observations" navigation={navigation} />
         <BlankElement />
-        <Card title="Tower Member Mapping" />
+        <Card title="Tower Member Mapping" navigation={navigation} />
       </View>
       <View style={styles.column}>
-        <Card title="Tower Member Mapping" />
+        <Card title="Tower Member Mapping" navigation={navigation} />
         <BlankElement />
-        <Card title="Ancillaries table" />
+        <Card title="Ancillaries table" navigation={navigation} />
       </View>
     </View>
   );
