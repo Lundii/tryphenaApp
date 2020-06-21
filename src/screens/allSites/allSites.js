@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text, FlatList, StyleSheet, SafeAreaView} from 'react-native';
+import {FlatList, StyleSheet, SafeAreaView} from 'react-native';
 import Site from './site';
 
 const DATA = [
@@ -44,12 +44,14 @@ const DATA = [
     title: 'SiteID: LG123456',
   },
 ];
-export const Allsites = () => {
+export const Allsites = ({navigation}) => {
   return (
     <SafeAreaView style={styles.container}>
       <FlatList
         data={DATA}
-        renderItem={({item}) => <Site title={item.title} />}
+        renderItem={({item}) => (
+          <Site title={item.title} navigation={navigation} />
+        )}
         keyExtractor={item => item.id}
       />
     </SafeAreaView>

@@ -1,15 +1,15 @@
 import React from 'react';
 import {} from 'react-native';
-import {createStackNavigator} from '@react-navigation/stack';
+import {createDrawerNavigator} from '@react-navigation/drawer';
 import Home from './screens/home';
 
-const Stack = createStackNavigator();
+const Drawer = createDrawerNavigator();
 
 const AppNavigations = () => {
   return (
-    <Stack.Navigator>
-      <Stack.Screen name="Home" component={Home} />
-    </Stack.Navigator>
+    <Drawer.Navigator>
+      <Drawer.Screen name="Home" component={Home} />
+    </Drawer.Navigator>
   );
 };
 
