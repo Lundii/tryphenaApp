@@ -5,7 +5,7 @@ import Section from '../../components/section';
 
 const SiteDetails = ({navigation}) => {
   return (
-    <ScrollView style={{marginHorizontal: 8, marginVertical: 48}}>
+    <ScrollView style={{marginHorizontal: 8, marginVertical: 8}}>
       <Section header="Basic Site Info">
         <Input label="Site ID" />
         <Input label="Date and Time" />
