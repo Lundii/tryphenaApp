@@ -1,9 +1,9 @@
 import React from 'react';
 import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 
-const Card = ({title, navigation}) => {
+const Card = ({title, navigation, to}) => {
   const handlePress = () => {
-    navigation.navigate('SiteDetails');
+    navigation.navigate(to);
   };
 
   return (

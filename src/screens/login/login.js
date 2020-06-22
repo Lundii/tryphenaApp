@@ -1,7 +1,15 @@
 import React, {useState, useContext} from 'react';
-import {View, ImageBackground, StyleSheet} from 'react-native';
-import Input from '../../components/input';
+import {
+  View,
+  ScrollView,
+  Image,
+  StyleSheet,
+  Text,
+  KeyboardAvoidingView,
+} from 'react-native';
+import Input from '../../components/input/cusInput';
 import Button from '../../components/button';
+import Card from '../../components/section';
 import {AuthContext} from '../../context/authContext';
 
 const Login = ({navigation}) => {
@@ -43,16 +51,18 @@ const Login = ({navigation}) => {
   };
 
   return (
-    <View>
-      <ImageBackground
-        source={require('../../assets/homeImage.jpg')}
-        style={styles.backgroundImage}>
-        <View style={styles.container}>
-          <Input placeholder="Email" onChangeText={handleEmailChange} />
-          <Input placeholder="Password" onChangeText={handlePasswordChange} />
+    <View style={styles.container}>
+      <View style={styles.card}>
+        <Card>
+          <Text style={{fontSize: 24, fontFamily: 'Montserrat-Medium', marginBottom: 16}}>
+            Login
+          </Text>
+          <Input label="Email" onChangeText={handleEmailChange} />
+          <Input label="Password" onChangeText={handlePasswordChange} />
           <Button title="Login" onPress={handlePress} />
-        </View>
-      </ImageBackground>
+        </Card>
+      </View>
+      {/* </ImageBackground> */}
     </View>
   );
 };
@@ -61,10 +71,11 @@ const styles = StyleSheet.create({
   container: {
     justifyContent: 'center',
     alignItems: 'center',
-    height: '100%',
-    padding: 24,
-    paddingLeft: 32,
-    paddingRight: 32,
+    padding: 8,
+    flex: 1,
+  },
+  card: {
+    width: '100%',
   },
   backgroundImage: {
     resizeMode: 'cover',

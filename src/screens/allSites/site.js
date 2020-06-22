@@ -1,5 +1,6 @@
 import React from 'react';
 import {View, StyleSheet, Text, TouchableOpacity} from 'react-native';
+import Switch from '../../components/switch';
 
 const Site = ({title, navigation}) => {
   const handleClick = () => {
