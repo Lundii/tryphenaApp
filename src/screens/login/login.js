@@ -54,7 +54,12 @@ const Login = ({navigation}) => {
     <View style={styles.container}>
       <View style={styles.card}>
         <Card>
-          <Text style={{fontSize: 24, fontFamily: 'Montserrat-Medium', marginBottom: 16}}>
+          <Text
+            style={{
+              fontSize: 24,
+              fontFamily: 'Montserrat-Medium',
+              marginBottom: 16,
+            }}>
             Login
           </Text>
           <Input label="Email" onChangeText={handleEmailChange} />
