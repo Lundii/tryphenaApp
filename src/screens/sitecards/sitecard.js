@@ -1,36 +1,39 @@
 import React from 'react';
+import MatIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import {View, StyleSheet, ScrollView} from 'react-native';
 import Card from './card';
 
 const SiteCards = ({navigation}) => {
   return (
-    <ScrollView>
-      <View style={styles.container}>
-        <View style={styles.column}>
-          <Card title="Prelimary Instuctions" navigation={navigation} />
-          <BlankElement />
-          <Card title="Site Details" navigation={navigation} to="SiteDetails" />
-        </View>
-        <View style={styles.column}>
-          <Card
-            title="Observations"
-            navigation={navigation}
-            to="Observations"
-          />
-          <BlankElement />
-          <Card title="Tower Member Mapping" navigation={navigation} />
-        </View>
-        <View style={styles.column}>
-          <Card title="Tower Member Mapping" navigation={navigation} />
-          <BlankElement />
-          <Card
-            title="Ancillaries table"
-            navigation={navigation}
-            to="Anciliary"
-          />
-        </View>
+    <View style={styles.container}>
+      <View style={styles.row}>
+        <Card title="Prelimary Instuctions" navigation={navigation}>
+          <MatIcon name="text-subject" size={40} color="#FF6666" />
+        </Card>
+        <BlankElement />
+        <Card title="Site Details" navigation={navigation} to="SiteDetails">
+          <MatIcon name="note-outline" size={40} color="#FF6666" />
+        </Card>
       </View>
-    </ScrollView>
+      <View style={styles.row}>
+        <Card title="Observations" navigation={navigation} to="Observations">
+          <MatIcon name="eye-outline" size={40} color="#FF6666" />
+        </Card>
+        <BlankElement />
+        <Card title="Tower Member Mapping" navigation={navigation}>
+          <MatIcon name="transmission-tower" size={40} color="#FF6666" />
+        </Card>
+      </View>
+      <View style={styles.row}>
+        <Card title="Tower Member Mapping" navigation={navigation}>
+          <MatIcon name="transmission-tower" size={40} color="#FF6666" />
+        </Card>
+        <BlankElement />
+        <Card title="Ancillaries table" navigation={navigation} to="Anciliary">
+          <MatIcon name="format-columns" size={40} color="#FF6666" />
+        </Card>
+      </View>
+    </View>
   );
 };
 
@@ -39,13 +42,13 @@ const BlankElement = () => {
 };
 
 const styles = StyleSheet.create({
-  column: {
-    flexDirection: 'row',
-  },
   container: {
     flex: 1,
-    padding: 20,
-    backgroundColor: '#F3F3F3',
+    padding: 16,
+  },
+  row: {
+    flexDirection: 'row',
+    flex: 1,
   },
   blank: {
     width: 16,
