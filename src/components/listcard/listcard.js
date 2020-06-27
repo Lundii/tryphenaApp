@@ -1,22 +1,27 @@
 import React from 'react';
-import {View, StyleSheet} from 'react-native';
+import {View, StyleSheet, TouchableOpacity} from 'react-native';
 import styled from 'styled-components';
 import BodyText from '../text/bodytext';
 
-const ListCard = ({sn}) => {
+const ListCard = ({sn, title, description, handlePress}) => {
+
+  const _handlePress = () => {
+    handlePress();
+  };
+
   return (
-    <View>
+    <TouchableOpacity onPress={_handlePress} activeOpacity={0.5}>
       <View style={styles.wrapper}>
         <View style={styles.SN}>
           <BodyText style={styles.text}>{sn}</BodyText>
         </View>
-        <View style={styles.description}>
-          <BodyText>Faded</BodyText>
-          <BodyText>Leg A</BodyText>
+        <View>
+          <BodyText style={styles.title}>{title}</BodyText>
+          <BodyText style={styles.description}>{description}</BodyText>
         </View>
       </View>
       <View style={styles.divider} />
-    </View>
+    </TouchableOpacity>
   );
 };
 
@@ -32,7 +37,7 @@ const SN = styled.View`
 const styles = StyleSheet.create({
   wrapper: {
     flexDirection: 'row',
-    padding: 16,
+    padding: 12,
     backgroundColor: 'white',
   },
   SN: {
@@ -42,12 +47,18 @@ const styles = StyleSheet.create({
     height: 40,
     justifyContent: 'center',
     alignItems: 'center',
+    marginRight: 16,
   },
   text: {
     color: 'white',
   },
+  title: {
+    fontFamily: 'Montserrat-SemiBold',
+    fontSize: 16,
+  },
   description: {
-    paddingLeft: 16,
+    fontFamily: 'Montserrat-Regular',
+    fontSize: 14,
   },
   divider: {
     borderBottomWidth: 1,

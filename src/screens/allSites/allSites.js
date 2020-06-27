@@ -1,67 +1,82 @@
 import React from 'react';
 import {FlatList, StyleSheet, SafeAreaView} from 'react-native';
-import Site from './site';
+import ListCard from '../../components/listcard';
+import {FloatButton} from '../../components/button';
 
 const DATA = [
   {
-    id: 1,
-    title: 'SiteID: LG123456',
+    sn: 1,
+    siteID: 'IHS_LAG_0008A',
+    address: 'Ladipo Estate, Oshodi.',
   },
   {
-    id: 2,
-    title: 'SiteID: LG123456',
+    sn: 2,
+    siteID: 'IHS_LAG_0008A',
+    address: 'Ladipo Estate, Oshodi.',
   },
   {
-    id: 3,
-    title: 'SiteID: LG123456',
+    sn: 3,
+    siteID: 'IHS_LAG_0008A',
+    address: 'Ladipo Estate, Oshodi.',
   },
   {
-    id: 4,
-    title: 'SiteID: LG123456',
+    sn: 4,
+    siteID: 'IHS_LAG_0008A',
+    address: 'Ladipo Estate, Oshodi.',
   },
   {
-    id: 5,
-    title: 'SiteID: LG123456',
+    sn: 5,
+    siteID: 'IHS_LAG_0008A',
+    address: 'Ladipo Estate, Oshodi.',
   },
   {
-    id: 6,
-    title: 'SiteID: LG123456',
+    sn: 6,
+    siteID: 'IHS_LAG_0008A',
+    address: 'Ladipo Estate, Oshodi.',
   },
   {
-    id: 7,
-    title: 'SiteID: LG123456',
+    sn: 7,
+    siteID: 'IHS_LAG_0008A',
+    address: 'Ladipo Estate, Oshodi.',
   },
   {
-    id: 8,
-    title: 'SiteID: LG123456',
+    sn: 8,
+    siteID: 'IHS_LAG_0008A',
+    address: 'Ladipo Estate, Oshodi.',
   },
   {
-    id: 9,
-    title: 'SiteID: LG123456',
+    sn: 9,
+    siteID: 'IHS_LAG_0008A',
+    address: 'Ladipo Estate, Oshodi.',
   },
   {
-    id: 10,
-    title: 'SiteID: LG123456',
+    sn: 10,
+    siteID: 'IHS_LAG_0008A',
+    address: 'Ladipo Estate, Oshodi.',
   },
 ];
-export const Allsites = ({navigation}) => {
+
+const Allsites = ({navigation}) => {
+  const handlePress = () => {
+    navigation.navigate('SiteCards');
+  };
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView>
       <FlatList
         data={DATA}
         renderItem={({item}) => (
-          <Site title={item.title} navigation={navigation} />
+          <ListCard
+            sn={item.sn}
+            title={item.siteID}
+            description={item.address}
+            handlePress={handlePress}
+          />
         )}
-        keyExtractor={item => item.id}
+        keyExtractor={item => item.sn}
       />
+      <FloatButton />
     </SafeAreaView>
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    backgroundColor: '#F3F3F3',
-    padding: 8,
-  },
-});
 export default Allsites;
