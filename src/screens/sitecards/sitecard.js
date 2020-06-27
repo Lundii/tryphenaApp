@@ -23,7 +23,11 @@ const SiteCards = ({navigation}) => {
         <View style={styles.column}>
           <Card title="Tower Member Mapping" navigation={navigation} />
           <BlankElement />
-          <Card title="Ancillaries table" navigation={navigation} />
+          <Card
+            title="Ancillaries table"
+            navigation={navigation}
+            to="Anciliary"
+          />
         </View>
       </View>
     </ScrollView>

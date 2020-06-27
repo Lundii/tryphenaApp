@@ -3,6 +3,7 @@ import Allsites from '../allSites';
 import SiteCards from '../sitecards';
 import SiteDetails from '../siteDetails';
 import Observations from '../observations';
+import Anciliary from '../anciliary';
 import {createStackNavigator} from '@react-navigation/stack';
 
 const Stack = createStackNavigator();
@@ -14,6 +15,7 @@ const Home = () => {
       <Stack.Screen name="SiteCards" component={SiteCards} />
       <Stack.Screen name="SiteDetails" component={SiteDetails} />
       <Stack.Screen name="Observations" component={Observations} />
+      <Stack.Screen name="Anciliary" component={Anciliary} />
     </Stack.Navigator>
   );
 };

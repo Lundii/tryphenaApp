@@ -1,3 +1,4 @@
 import Button from './button';
+import FloatButton from './floatbutton';
 
-export default Button;
+export {Button, FloatButton};

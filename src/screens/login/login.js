@@ -8,7 +8,7 @@ import {
   KeyboardAvoidingView,
 } from 'react-native';
 import Input from '../../components/input/cusInput';
-import Button from '../../components/button';
+import {Button} from '../../components/button';
 import Card from '../../components/section';
 import {AuthContext} from '../../context/authContext';
 
