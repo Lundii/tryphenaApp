@@ -16,6 +16,7 @@ const Container = Styled.View`
   padding: 12px;
   margin: ${({header}) => (header ? '16px 8px 16px 8px' : '4px 8px')};
   border-radius: 4px;
+  elevation: 1
 `;
 const styles = StyleSheet.create({
   container: {
