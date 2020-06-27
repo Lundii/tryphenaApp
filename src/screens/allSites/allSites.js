@@ -1,5 +1,5 @@
 import React from 'react';
-import {FlatList, StyleSheet, SafeAreaView} from 'react-native';
+import {FlatList, View, SafeAreaView} from 'react-native';
 import ListCard from '../../components/listcard';
 import {FloatButton} from '../../components/button';
 
@@ -62,18 +62,20 @@ const Allsites = ({navigation}) => {
   };
   return (
     <SafeAreaView>
-      <FlatList
-        data={DATA}
-        renderItem={({item}) => (
-          <ListCard
-            sn={item.sn}
-            title={item.siteID}
-            description={item.address}
-            handlePress={handlePress}
-          />
-        )}
-        keyExtractor={item => item.sn}
-      />
+      <View>
+        <FlatList
+          data={DATA}
+          renderItem={({item}) => (
+            <ListCard
+              sn={item.sn}
+              title={item.siteID}
+              description={item.address}
+              handlePress={handlePress}
+            />
+          )}
+          keyExtractor={item => item.sn}
+        />
+      </View>
       <FloatButton />
     </SafeAreaView>
   );
