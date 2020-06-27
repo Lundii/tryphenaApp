@@ -1,12 +1,15 @@
 import React from 'react';
-import Icon from 'react-native-vector-icons/FontAwesome';
-import BodyText from '../text';
-import {TouchableOpacity, StyleSheet} from 'react-native';
+import Icon from 'react-native-vector-icons/AntDesign';
+import {TouchableOpacity, StyleSheet, Text} from 'react-native';
 
-const FloatButton = () => {
+const FloatButton = ({handlePress}) => {
+  const _handlePress = () => {
+    handlePress();
+  };
+
   return (
-    <TouchableOpacity style={styles.container}>
-      <Icon name="plus"  size={15} color="white" />
+    <TouchableOpacity onPress={_handlePress} style={styles.container}>
+      <Icon name="plus" size={20} color="white" />
     </TouchableOpacity>
   );
 };
@@ -22,6 +25,7 @@ const styles = StyleSheet.create({
     right: 20,
     justifyContent: 'center',
     alignItems: 'center',
+    elevation: 2,
   },
 });
 

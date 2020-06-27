@@ -1,27 +1,62 @@
 import React from 'react';
-import {ScrollView, View, Text} from 'react-native';
-import Section from '../../components/section';
+import {SafeAreaView, FlatList, View} from 'react-native';
 import ListCard from '../../components/listcard';
-import BodyText from '../../components/text/bodytext';
 import {FloatButton} from '../../components/button';
 
+const DATA = [
+  {
+    sn: 1,
+    type: 'Faded',
+    leg: 'LEG A',
+  },
+  {
+    sn: 2,
+    type: 'Faded',
+    leg: 'LEG B',
+  },
+  {
+    sn: 3,
+    type: 'Faded',
+    leg: 'LEG C',
+  },
+  {
+    sn: 4,
+    type: 'Faded',
+    leg: 'LEG A',
+  },
+  {
+    sn: 5,
+    type: 'Faded',
+    leg: 'LEG B',
+  },
+  {
+    sn: 6,
+    type: 'Faded',
+    leg: 'LEG A',
+  },
+];
+
 const RFAntenna = () => {
+  const handlePress = () => {};
+
   return (
-    <View>
-      <ScrollView>
-        <ListCard sn={1} />
-        <ListCard sn={2} />
-        <ListCard sn={3} />
-        <ListCard sn={4} />
-        <ListCard sn={5} />
-        <ListCard sn={6} />
-        <ListCard sn={7} />
-        <ListCard sn={5} />
-        <ListCard sn={6} />
-        <ListCard sn={7} />
-      </ScrollView>
+    <SafeAreaView style={{flex: 1}}>
+      <View>
+        <FlatList
+          data={DATA}
+          renderItem={({item}) => (
+            <ListCard
+              sn={item.sn}
+              title={item.type}
+              description={item.leg}
+              handlePress={handlePress}
+            />
+          )}
+          keyExtractor={item => item.sn}
+        />
+      </View>
       <FloatButton />
-    </View>
+    </SafeAreaView>
   );
 };
 
