@@ -1,13 +1,16 @@
 import React from 'react';
 import MatIcon from 'react-native-vector-icons/MaterialCommunityIcons';
-import {View, StyleSheet, ScrollView} from 'react-native';
+import {View, StyleSheet} from 'react-native';
 import Card from './card';
 
 const SiteCards = ({navigation}) => {
   return (
     <View style={styles.container}>
       <View style={styles.row}>
-        <Card title="Prelimary Instuctions" navigation={navigation}>
+        <Card
+          title="Prelimary Instuctions"
+          navigation={navigation}
+          to="Instructions">
           <MatIcon name="text-subject" size={40} color="#FF6666" />
         </Card>
         <BlankElement />
