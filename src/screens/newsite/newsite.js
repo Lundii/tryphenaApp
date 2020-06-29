@@ -1,8 +1,8 @@
 import React from 'react';
-import {View} from 'react-native';
+import {View, Text} from 'react-native';
 import {Header} from 'react-native-elements';
-import Input from '../../components/input/cusInput';
-import Button from '../../components/button';
+import Input from '../../components/input';
+import {Button} from '../../components/button';
 import Section from '../../components/section';
 import {BodyText} from '../../components/text';
 
@@ -12,7 +12,7 @@ const NewSite = () => {
       <Header
         statusBarProps={{translucent: true}}
         containerStyle={{
-          backgroundColor: 'white'
+          backgroundColor: 'white',
         }}
         leftComponent={{icon: 'menu'}}
         centerComponent={{text: 'MY TITLE'}}

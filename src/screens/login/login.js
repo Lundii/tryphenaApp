@@ -1,15 +1,9 @@
 import React, {useState, useContext} from 'react';
-import {
-  View,
-  ScrollView,
-  Image,
-  StyleSheet,
-  Text,
-  KeyboardAvoidingView,
-} from 'react-native';
-import Input from '../../components/input/cusInput';
+import {View, StyleSheet, Text, ScrollView} from 'react-native';
+import Input from '../../components/input';
 import {Button} from '../../components/button';
-import Card from '../../components/section';
+import Section from '../../components/section';
+import {BodyText} from '../../components/text';
 import {AuthContext} from '../../context/authContext';
 
 const Login = ({navigation}) => {
@@ -53,21 +47,12 @@ const Login = ({navigation}) => {
   return (
     <View style={styles.container}>
       <View style={styles.card}>
-        <Card>
-          <Text
-            style={{
-              fontSize: 24,
-              fontFamily: 'Montserrat-Medium',
-              marginBottom: 16,
-            }}>
-            Login
-          </Text>
+        <Section header="Login">
           <Input label="Email" onChangeText={handleEmailChange} />
           <Input label="Password" onChangeText={handlePasswordChange} />
           <Button title="Login" onPress={handlePress} />
-        </Card>
+        </Section>
       </View>
-      {/* </ImageBackground> */}
     </View>
   );
 };
@@ -81,12 +66,6 @@ const styles = StyleSheet.create({
   },
   card: {
     width: '100%',
-  },
-  backgroundImage: {
-    resizeMode: 'cover',
-    justifyContent: 'center',
-    width: '100%',
-    height: '100%',
   },
 });
 
