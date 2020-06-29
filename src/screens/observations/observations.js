@@ -38,9 +38,13 @@ const Observations = () => {
       <Section>
         <Question question="Are there any empty load brackets?">
           <View style={styles.row}>
-            <Input label="Height" />
+            <View style={{flex: 1}}>
+              <Input label="Height" />
+            </View>
             <VerticalBlank />
-            <Input label="Section" />
+            <View style={{flex: 1}}>
+              <Input label="Section" />
+            </View>
           </View>
         </Question>
       </Section>
@@ -62,9 +66,13 @@ const Observations = () => {
       <Section>
         <Question question="Are the tower members Rusted?">
           <View style={styles.row}>
-            <Input label="Member" />
+            <View style={{flex: 1}}>
+              <Input label="Member" />
+            </View>
             <VerticalBlank />
-            <Input label="Section" />
+            <View style={{flex: 1}}>
+              <Input label="Section" />
+            </View>
           </View>
         </Question>
       </Section>
@@ -74,9 +82,13 @@ const Observations = () => {
       <Section>
         <Question question="Are proper members used in all sections">
           <View style={styles.row}>
-            <Input label="Where" />
+            <View style={{flex: 1}}>
+              <Input label="Where" />
+            </View>
             <VerticalBlank />
-            <Input label="Member" />
+            <View style={{flex: 1}}>
+              <Input label="Member" />
+            </View>
           </View>
         </Question>
       </Section>

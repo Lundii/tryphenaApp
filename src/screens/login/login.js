@@ -1,8 +1,8 @@
 import React, {useState, useContext} from 'react';
-import {View, StyleSheet, Text} from 'react-native';
+import {View, StyleSheet, Text, ScrollView} from 'react-native';
 import Input from '../../components/input';
 import {Button} from '../../components/button';
-import Card from '../../components/section';
+import Section from '../../components/section';
 import {BodyText} from '../../components/text';
 import {AuthContext} from '../../context/authContext';
 
@@ -47,11 +47,11 @@ const Login = ({navigation}) => {
   return (
     <View style={styles.container}>
       <View style={styles.card}>
-        <Card header="Login">
+        <Section header="Login">
           <Input label="Email" onChangeText={handleEmailChange} />
           <Input label="Password" onChangeText={handlePasswordChange} />
           <Button title="Login" onPress={handlePress} />
-        </Card>
+        </Section>
       </View>
     </View>
   );

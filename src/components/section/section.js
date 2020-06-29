@@ -16,7 +16,6 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: 'white',
     padding: 12,
-    elevation: 1,
   },
   header: {
     fontSize: 16,

@@ -17,7 +17,7 @@ const Input = props => {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    // flex: 1,
   },
   input: {
     borderRadius: 4,
