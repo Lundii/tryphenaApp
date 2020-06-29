@@ -1,11 +1,11 @@
 import React, {useState} from 'react';
 import {View, ImageBackground, StyleSheet, ScrollView} from 'react-native';
-import Input from '../../components/input/cusInput';
+import Input from '../../components/input';
 import Section from '../../components/section';
 
 const SiteDetails = ({navigation}) => {
   return (
-    <ScrollView style={{marginHorizontal: 8, marginVertical: 8}}>
+    <ScrollView>
       <Section header="Basic Site Info">
         <Input label="Site ID" />
         <Input label="Date and Time" />
@@ -23,7 +23,7 @@ const SiteDetails = ({navigation}) => {
           </View>
         </View>
       </Section>
-      <Section header="Stub Dimention">
+      <Section header="Stub Dimension">
         <View
           style={{
             flexDirection: 'row',
@@ -37,7 +37,7 @@ const SiteDetails = ({navigation}) => {
           </View>
         </View>
       </Section>
-      <Section header="Site Dimention">
+      <Section header="Site Dimension">
         <View
           style={{
             flexDirection: 'row',
@@ -51,7 +51,7 @@ const SiteDetails = ({navigation}) => {
           </View>
         </View>
       </Section>
-      <Section header="Site Dimention">
+      <Section header="Base plate Dimension">
         <View
           style={{
             flexDirection: 'row',
@@ -65,11 +65,11 @@ const SiteDetails = ({navigation}) => {
           </View>
           <BlankElement />
           <View style={{flex: 1}}>
-            <Input label="Heigth" />
+            <Input label="Height" />
           </View>
         </View>
       </Section>
-      <Section header="Column Dimention">
+      <Section header="Column Dimension">
         <View
           style={{
             flexDirection: 'row',
@@ -83,7 +83,39 @@ const SiteDetails = ({navigation}) => {
           </View>
           <BlankElement />
           <View style={{flex: 1}}>
-            <Input label="Heigth" />
+            <Input label="Height" />
+          </View>
+        </View>
+      </Section>
+      <Section header="Tower Details">
+        <View
+          style={{
+            flexDirection: 'row',
+          }}>
+          <View style={{flex: 1}}>
+            <Input label="Tower height" />
+          </View>
+          <BlankElement />
+          <View style={{flex: 1}}>
+            <Input label="Make/Model" />
+          </View>
+        </View>
+        <Input label="Number of tower legs" />
+        <Input label="Tower heel to heel" />
+        <View
+          style={{
+            flexDirection: 'row',
+          }}>
+          <View style={{flex: 1}}>
+            <Input label="Button" />
+          </View>
+          <BlankElement />
+          <View style={{flex: 1}}>
+            <Input label="Top" />
+          </View>
+          <BlankElement />
+          <View style={{flex: 1}}>
+            <Input label="Neck" />
           </View>
         </View>
       </Section>
