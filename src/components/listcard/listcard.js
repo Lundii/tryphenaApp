@@ -17,31 +17,33 @@ const ListCard = ({sn, title, description, handlePress, children}) => {
   };
 
   return (
-    <TouchableOpacity onPress={_handlePress} activeOpacity={0.5}>
-      <View style={styles.wrapper}>
-        {sn && (
-          <View style={styles.SN}>
-            <BodyText style={styles.text}>{sn}</BodyText>
+    <View>
+      <TouchableOpacity onPress={_handlePress} activeOpacity={0.5}>
+        <View style={styles.wrapper}>
+          {sn && (
+            <View style={styles.SN}>
+              <BodyText style={styles.text}>{sn}</BodyText>
+            </View>
+          )}
+          <View>
+            <BodyText style={styles.title}>{title}</BodyText>
+            {description && (
+              <BodyText style={styles.description}>{description}</BodyText>
+            )}
           </View>
-        )}
-        <View>
-          <BodyText style={styles.title}>{title}</BodyText>
-          {description && (
-            <BodyText style={styles.description}>{description}</BodyText>
+          {children && (
+            <MatIcon
+              style={{marginLeft: 'auto'}}
+              name={icon}
+              size={30}
+              color="#000"
+            />
           )}
         </View>
-        {children && (
-          <MatIcon
-            style={{marginLeft: 'auto'}}
-            name={icon}
-            size={30}
-            color="#000"
-          />
-        )}
-      </View>
+      </TouchableOpacity>
       {icon === 'keyboard-arrow-down' && children}
       <View style={styles.divider} />
-    </TouchableOpacity>
+    </View>
   );
 };
 

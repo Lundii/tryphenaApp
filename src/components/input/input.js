@@ -32,7 +32,7 @@ const styles = StyleSheet.create({
   label: {
     marginBottom: 4,
     fontFamily: 'Montserrat-Medium',
-    fontSize: 12,
+    fontSize: 14,
   },
 });
 

@@ -2,13 +2,9 @@ import React from 'react';
 import Icon from 'react-native-vector-icons/AntDesign';
 import {TouchableOpacity, StyleSheet, Text} from 'react-native';
 
-const FloatButton = ({handlePress}) => {
-  const _handlePress = () => {
-    handlePress();
-  };
-
+const FloatButton = props => {
   return (
-    <TouchableOpacity onPress={_handlePress} style={styles.container}>
+    <TouchableOpacity {...props} style={styles.container}>
       <Icon name="plus" size={20} color="white" />
     </TouchableOpacity>
   );
