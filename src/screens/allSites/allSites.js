@@ -54,6 +54,11 @@ const DATA = [
     siteID: 'IHS_LAG_0008A',
     address: 'Ladipo Estate, Oshodi.',
   },
+  {
+    sn: 11,
+    siteID: 'IHS_LAG_0008A',
+    address: 'Ladipo Estate, Oshodi.',
+  },
 ];
 
 const Allsites = ({navigation}) => {
