@@ -23,13 +23,20 @@ const SiteCards = ({navigation}) => {
           <MatIcon name="eye-outline" size={40} color="#FF6666" />
         </Card>
         <BlankElement />
-        <Card title="Tower Member Mapping" navigation={navigation}>
+        <Card
+          title="Tower Member Mapping"
+          navigation={navigation}
+          to="Tower Member Mapping">
           <MatIcon name="transmission-tower" size={40} color="#FF6666" />
         </Card>
       </View>
       <View style={styles.row}>
-        <Card title="Tower Member Mapping" navigation={navigation}>
-          <MatIcon name="transmission-tower" size={40} color="#FF6666" />
+        <Card title="Pictures" navigation={navigation}>
+          <MatIcon
+            name="picture-in-picture-bottom-right"
+            size={40}
+            color="#FF6666"
+          />
         </Card>
         <BlankElement />
         <Card title="Ancillaries table" navigation={navigation} to="Anciliary">

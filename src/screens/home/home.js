@@ -5,6 +5,7 @@ import SiteDetails from '../siteDetails';
 import Observations from '../observations';
 import Ancillary from '../ancillary';
 import Instructions from '../instructions';
+import TowerMapping from '../towermapping';
 import {createStackNavigator} from '@react-navigation/stack';
 
 const Stack = createStackNavigator();
@@ -18,6 +19,7 @@ const Home = () => {
       <Stack.Screen name="Observations" component={Observations} />
       <Stack.Screen name="Anciliary" component={Ancillary} />
       <Stack.Screen name="Instructions" component={Instructions} />
+      <Stack.Screen name="Tower Member Mapping" component={TowerMapping} />
     </Stack.Navigator>
   );
 };
