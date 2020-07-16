@@ -1,15 +1,32 @@
-import React from 'react';
+import React, {useState} from 'react';
 
 import {StyleSheet, Text, TextInput, View} from 'react-native';
+import {useField} from '../form';
 
-const Input = props => {
+const Input = ({label, field, validate}) => {
+  const {setField} = useField(field);
+  const [error, setError] = useState(false);
+
+  const handleChange = inputText => {
+    setField(inputText);
+  };
+
+  const handleValidation = e => {
+    const {text} = e.nativeEvent;
+    setError(validate(text));
+  };
   return (
     <View style={styles.container}>
       <View>
-        <Text style={styles.label}>{props.label}</Text>
+        <Text style={styles.label}>{label}</Text>
       </View>
       <View>
-        <TextInput {...props} style={styles.input} />
+        <TextInput
+          onEndEditing={validate ? handleValidation : ''}
+          onChangeText={handleChange}
+          style={styles.input}
+        />
+        {error && <Text style={styles.error}>{error}</Text>}
       </View>
     </View>
   );
@@ -33,6 +50,12 @@ const styles = StyleSheet.create({
     marginBottom: 4,
     fontFamily: 'Montserrat-Medium',
     fontSize: 14,
+  },
+  error: {
+    color: 'red',
+    fontFamily: 'Montserrat-Medium',
+    paddingBottom: 8,
+    fontSize: 12,
   },
 });
 

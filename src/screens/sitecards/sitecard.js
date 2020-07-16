@@ -2,10 +2,21 @@ import React from 'react';
 import MatIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import {View, StyleSheet} from 'react-native';
 import Card from './card';
+import {BodyText} from '../../components/text';
 
 const SiteCards = ({navigation}) => {
   return (
     <View style={styles.container}>
+      <View style={styles.details}>
+        <BodyText
+          style={{
+            fontSize: 20,
+            fontFamily: 'Montserrat-SemiBold',
+          }}>
+          IHS_LAG_0008A
+        </BodyText>
+        <BodyText>Ladipo, Oshodi Estate.</BodyText>
+      </View>
       <View style={styles.row}>
         <Card
           title="Prelimary Instuctions"
@@ -63,5 +74,8 @@ const styles = StyleSheet.create({
   blank: {
     width: 16,
   },
+  details: {
+    paddingBottom: 16,
+  }
 });
 export default SiteCards;
