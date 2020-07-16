@@ -1,79 +1,102 @@
-import React from 'react';
-import {FlatList, View, SafeAreaView} from 'react-native';
+import React, {useState, useEffect} from 'react';
+import {FlatList, View, SafeAreaView, StatusBar, Modal} from 'react-native';
+import Input from '../../components/input';
 import ListCard from '../../components/listcard';
-import {FloatButton} from '../../components/button';
-
-const DATA = [
-  {
-    sn: 1,
-    siteID: 'IHS_LAG_0008A',
-    address: 'Ladipo Estate, Oshodi.',
-  },
-  {
-    sn: 2,
-    siteID: 'IHS_LAG_0008A',
-    address: 'Ladipo Estate, Oshodi.',
-  },
-  {
-    sn: 3,
-    siteID: 'IHS_LAG_0008A',
-    address: 'Ladipo Estate, Oshodi.',
-  },
-  {
-    sn: 4,
-    siteID: 'IHS_LAG_0008A',
-    address: 'Ladipo Estate, Oshodi.',
-  },
-  {
-    sn: 5,
-    siteID: 'IHS_LAG_0008A',
-    address: 'Ladipo Estate, Oshodi.',
-  },
-  {
-    sn: 6,
-    siteID: 'IHS_LAG_0008A',
-    address: 'Ladipo Estate, Oshodi.',
-  },
-  {
-    sn: 7,
-    siteID: 'IHS_LAG_0008A',
-    address: 'Ladipo Estate, Oshodi.',
-  },
-  {
-    sn: 8,
-    siteID: 'IHS_LAG_0008A',
-    address: 'Ladipo Estate, Oshodi.',
-  },
-  {
-    sn: 9,
-    siteID: 'IHS_LAG_0008A',
-    address: 'Ladipo Estate, Oshodi.',
-  },
-  {
-    sn: 10,
-    siteID: 'IHS_LAG_0008A',
-    address: 'Ladipo Estate, Oshodi.',
-  },
-  {
-    sn: 11,
-    siteID: 'IHS_LAG_0008A',
-    address: 'Ladipo Estate, Oshodi.',
-  },
-];
+import {FloatButton, SubmitButton} from '../../components/button';
+import Section from '../../components/section';
+import {VerticalBlank} from '../../components/blank';
+import {Form} from '../../components/form';
+import {useFetcher} from '../../hooks';
 
 const Allsites = ({navigation}) => {
+  const {data: sites, request, isLoading, error} = useFetcher();
+  const {
+    request: createRequest,
+    isLoading: createIsLoading,
+    error: errorCreating,
+  } = useFetcher('POST');
+  const [modalVisible, setModalVisible] = useState(false);
+  const addNewSite = () => {
+    setModalVisible(true);
+  };
+
+  const editAntenna = () => {
+    setModalVisible(true);
+  };
+
+  useEffect(() => {
+    console.log(errorCreating);
+  }, [errorCreating]);
   const handlePress = () => {
     navigation.navigate('SiteCards');
   };
+  const handleCreateSite = async ({siteid, address, latitude, longitude}) => {
+    await createRequest('https://tryphena-staging.herokuapp.com/dash/site', {
+      siteid,
+      address,
+      latitude,
+      longitude,
+    });
+    setModalVisible(false);
+  };
+  useEffect(() => {
+    if (!sites) {
+      request('https://tryphena-staging.herokuapp.com/dash/sites');
+    }
+  }, [sites, request]);
   return (
-    <SafeAreaView>
+    <SafeAreaView style={{flex: 1}}>
+      <Modal visible={modalVisible} transparent animationType="slide">
+        <View
+          style={{
+            justifyContent: 'center',
+            alignItems: 'center',
+            padding: 8,
+            flex: 1,
+            backgroundColor: '#F3F3F3e9',
+          }}>
+          <View style={{width: '100%'}}>
+            <Section header="Enter site details">
+              <Form>
+                <Input
+                  label="Site ID"
+                  field="siteid"
+                  validate={value => (value ? null : 'Site is is required')}
+                />
+                <Input
+                  label="Address"
+                  field="address"
+                  validate={value => (value ? null : 'Address is required')}
+                />
+                <Input
+                  label="Latitude"
+                  field="latitude"
+                  validate={value => (value ? null : 'Latitude is required')}
+                />
+                <Input
+                  label="Longitude"
+                  field="longitude"
+                  validate={value => (value ? null : 'Longitude is required')}
+                />
+                <SubmitButton
+                  title="Create New Site"
+                  onPress={handleCreateSite}
+                />
+              </Form>
+            </Section>
+          </View>
+        </View>
+      </Modal>
+      <View>
+        <StatusBar backgroundColor="#E43F3F" />
+      </View>
       <View>
         <FlatList
-          data={DATA}
-          renderItem={({item}) => (
+          data={sites || []}
+          renderItem={({item, index}) => (
             <ListCard
-              sn={item.sn}
-              title={item.siteID}
+              sn={index + 1}
+              title={item.siteid}
               description={item.address}
               handlePress={handlePress}
             />
@@ -81,7 +104,7 @@ const Allsites = ({navigation}) => {
           keyExtractor={item => item.sn}
         />
       </View>
-      <FloatButton />
+      <FloatButton onPress={addNewSite} />
     </SafeAreaView>
   );
 };

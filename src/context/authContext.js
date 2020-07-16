@@ -13,6 +13,7 @@ export const AuthProvider = ({children}) => {
           isLoading: false,
         };
       case 'SIGNIN':
+        AsyncStorage.setItem('userToken', action.token);
         return {
           ...prevState,
           token: action.token,

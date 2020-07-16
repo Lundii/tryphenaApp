@@ -58,7 +58,7 @@ const styles = StyleSheet.create({
     borderBottomColor: '#4d4c4c25',
   },
   sec: {
-    backgroundColor: 'black',
+    backgroundColor: '#FFB5B5',
     alignItems: 'center',
     justifyContent: 'center',
     borderRadius: 50,

@@ -56,7 +56,7 @@ const styles = StyleSheet.create({
   },
   SN: {
     borderRadius: 50,
-    backgroundColor: '#595858',
+    backgroundColor: '#FFB5B5',
     width: 40,
     height: 40,
     justifyContent: 'center',
