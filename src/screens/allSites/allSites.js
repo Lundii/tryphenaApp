@@ -11,6 +11,7 @@ import {useFetcher} from '../../hooks';
 const Allsites = ({navigation}) => {
   const {data: sites, request, isLoading, error} = useFetcher();
   const {
+    data: newSite,
     request: createRequest,
     isLoading: createIsLoading,
     error: errorCreating,
@@ -27,8 +28,8 @@ const Allsites = ({navigation}) => {
   useEffect(() => {
     console.log(errorCreating);
   }, [errorCreating]);
-  const handlePress = () => {
-    navigation.navigate('SiteCards');
+  const handlePress = site => {
+    navigation.navigate('SiteCards', site);
   };
   const handleCreateSite = async ({siteid, address, latitude, longitude}) => {
     await createRequest('https://tryphena-staging.herokuapp.com/dash/site', {
@@ -39,11 +40,12 @@ const Allsites = ({navigation}) => {
     });
     setModalVisible(false);
   };
+
   useEffect(() => {
     if (!sites) {
       request('https://tryphena-staging.herokuapp.com/dash/sites');
     }
-  }, [sites, request]);
+  }, [sites, newSite, request]);
   return (
     <SafeAreaView style={{flex: 1}}>
       <Modal visible={modalVisible} transparent animationType="slide">
@@ -98,7 +100,7 @@ const Allsites = ({navigation}) => {
               sn={index + 1}
               title={item.siteid}
               description={item.address}
-              handlePress={handlePress}
+              handlePress={() => handlePress(item)}
             />
           )}
           keyExtractor={item => item.sn}
