@@ -4,7 +4,8 @@ import {View, StyleSheet} from 'react-native';
 import Card from './card';
 import {BodyText} from '../../components/text';
 
-const SiteCards = ({navigation}) => {
+const SiteCards = ({route, navigation}) => {
+  const {siteid, address} = route.params;
   return (
     <View style={styles.container}>
       <View style={styles.details}>
@@ -13,9 +14,9 @@ const SiteCards = ({navigation}) => {
             fontSize: 20,
             fontFamily: 'Montserrat-SemiBold',
           }}>
-          IHS_LAG_0008A
+          {siteid}
         </BodyText>
-        <BodyText>Ladipo, Oshodi Estate.</BodyText>
+        <BodyText>{address}</BodyText>
       </View>
       <View style={styles.row}>
         <Card
@@ -25,7 +26,11 @@ const SiteCards = ({navigation}) => {
           <MatIcon name="text-subject" size={40} color="#FF6666" />
         </Card>
         <BlankElement />
-        <Card title="Site Details" navigation={navigation} to="SiteDetails">
+        <Card
+          title="Site Details"
+          navigation={navigation}
+          to="SiteDetails"
+          params={route.params}>
           <MatIcon name="note-outline" size={40} color="#FF6666" />
         </Card>
       </View>
@@ -76,6 +81,6 @@ const styles = StyleSheet.create({
   },
   details: {
     paddingBottom: 16,
-  }
+  },
 });
 export default SiteCards;

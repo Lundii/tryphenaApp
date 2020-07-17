@@ -1,15 +1,21 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 
 import {StyleSheet, Text, TextInput, View} from 'react-native';
 import {useField} from '../form';
 
-const Input = ({label, field, validate}) => {
+const Input = ({label, field, validate, initialValue, keyboardType}) => {
   const {setField} = useField(field);
   const [error, setError] = useState(false);
+  const [value, setValue] = useState(initialValue);
 
   const handleChange = inputText => {
     setField(inputText);
+    setValue(inputText);
   };
+
+  useEffect(() => {
+    setField(value);
+  }, []);
 
   const handleValidation = e => {
     const {text} = e.nativeEvent;
@@ -25,6 +31,8 @@ const Input = ({label, field, validate}) => {
           onEndEditing={validate ? handleValidation : ''}
           onChangeText={handleChange}
           style={styles.input}
+          value={value}
+          keyboardType={keyboardType}
         />
         {error && <Text style={styles.error}>{error}</Text>}
       </View>

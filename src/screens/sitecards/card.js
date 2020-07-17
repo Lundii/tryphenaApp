@@ -4,9 +4,9 @@ import AntIcon from 'react-native-vector-icons/AntDesign';
 import {View, StyleSheet, TouchableOpacity} from 'react-native';
 import {BodyText} from '../../components/text';
 
-const Card = ({title, navigation, to, children}) => {
+const Card = ({title, navigation, to, children, params}) => {
   const handlePress = () => {
-    navigation.navigate(to);
+    navigation.navigate(to, params);
   };
 
   return (
