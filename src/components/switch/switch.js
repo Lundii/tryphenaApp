@@ -1,13 +1,24 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {View, StyleSheet, TouchableOpacity} from 'react-native';
 import styled from 'styled-components/native';
 import {BodyText} from '../text';
+import {useField} from '../form';
 
-const Switch = ({handleClick}) => {
+const Switch = ({field, onChange, initialValue}) => {
+  const {setField} = useField(field);
+  const [initValue, setInitValue] = useState(initialValue);
+  const [value, setValue] = useState(false);
+
   const handlePress = () => {
+    setField(initValue ? 'no' : 'yes');
+    onChange(!value);
     setValue(!value);
   };
-  const [value, setValue] = useState(false);
+
+  useEffect(() => {
+    setField(initValue || 'no');
+  }, []);
+
   return (
     <TouchableOpacity onPress={handlePress} style={styles.container}>
       <PositiveButton value={value}>

@@ -1,3 +1,3 @@
-import Form, {useField} from './form';
+import Form, {useField, useAutoSubmit} from './form';
 
-export {Form, useField};
+export {Form, useField, useAutoSubmit};

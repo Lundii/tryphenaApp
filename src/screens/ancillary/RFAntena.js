@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 import Icon from 'react-native-vector-icons/AntDesign';
 import ListCard from '../../components/listcard';
-import Input from '../../components/input';
+import {Input} from '../../components/input';
 import {BodyText} from '../../components/text';
 import {FloatButton} from '../../components/button';
 import {VerticalBlank} from '../../components/blank';

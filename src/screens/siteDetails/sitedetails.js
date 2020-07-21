@@ -6,8 +6,7 @@ import {SubmitButton} from '../../components/button';
 import Section from '../../components/section';
 import {useFetcher} from '../../hooks';
 
-const SiteDetails = ({route, navigation}) => {
-  console.log(route.params);
+const SiteDetails = ({route}) => {
   const {
     _id,
     siteid,
@@ -21,8 +20,6 @@ const SiteDetails = ({route, navigation}) => {
     stubdimension,
     towerdetails,
   } = route.params;
-
-  console.log(stubdimension.section);
 
   const {data, request, isLoading, error} = useFetcher('PUT');
 
