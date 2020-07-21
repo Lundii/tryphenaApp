@@ -1,11 +1,15 @@
-import React from 'react';
+import React, {useState, useCallback} from 'react';
 import {ScrollView, View, StyleSheet} from 'react-native';
 import Section from '../../components/section';
-import Input from '../../components/input';
+import {FormInput} from '../../components/input';
 import {VerticalBlank} from '../../components/blank';
 import Question from './question';
+import ExtraDetails from './extraDetails';
 
 const Observations = () => {
+  // const updateObservations = useCallback(value => {
+  //   setObservationState(prevState => prevState.push(value));
+  // }, []);
   return (
     <ScrollView>
       <Section>
@@ -39,11 +43,11 @@ const Observations = () => {
         <Question question="Are there any empty load brackets?">
           <View style={styles.row}>
             <View style={{flex: 1}}>
-              <Input label="Height" />
+              <FormInput label="Height" />
             </View>
             <VerticalBlank />
             <View style={{flex: 1}}>
-              <Input label="Section" />
+              <FormInput label="Section" />
             </View>
           </View>
         </Question>
@@ -65,15 +69,7 @@ const Observations = () => {
       </Section>
       <Section>
         <Question question="Are the tower members Rusted?">
-          <View style={styles.row}>
-            <View style={{flex: 1}}>
-              <Input label="Member" />
-            </View>
-            <VerticalBlank />
-            <View style={{flex: 1}}>
-              <Input label="Section" />
-            </View>
-          </View>
+          <ExtraDetails headers={['Member', 'Section']} />
         </Question>
       </Section>
       <Section>
@@ -83,37 +79,37 @@ const Observations = () => {
         <Question question="Are proper members used in all sections">
           <View style={styles.row}>
             <View style={{flex: 1}}>
-              <Input label="Where" />
+              <FormInput label="Where" />
             </View>
             <VerticalBlank />
             <View style={{flex: 1}}>
-              <Input label="Member" />
+              <FormInput label="Member" />
             </View>
           </View>
         </Question>
       </Section>
       <Section>
         <Question question="Is the tower fully triangulated?">
-          <Input label="To what panel" />
+          <FormInput label="To what panel" />
         </Question>
       </Section>
       <Section>
         <Question question="Are in-plan bracings installed on the tower?">
-          <Input label="To what panel" />
+          <FormInput label="To what panel" />
         </Question>
       </Section>
       <Section>
         <Question question="Are Hip bracings installed on the tower?">
-          <Input label="To what panel" />
+          <FormInput label="To what panel" />
         </Question>
       </Section>
       <Section>
         <Question question="Are Sub bracings installed on the tower?">
-          <Input label="To what panel" />
+          <FormInput label="To what panel" />
         </Question>
       </Section>
-      <Section>
-        <Input
+      {/* <Section>
+        <FormInput
           label="How is the site environment"
           multiline={true}
           numberOfLines={3}
@@ -121,13 +117,13 @@ const Observations = () => {
         />
       </Section>
       <Section>
-        <Input
+        <FormInput
           label="Any other observation"
           multiline={true}
           numberOfLines={4}
           textAlignVertical="top"
         />
-      </Section>
+      </Section> */}
     </ScrollView>
   );
 };

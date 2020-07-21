@@ -1,4 +1,5 @@
-import React, {useContext} from 'react';
+/* eslint-disable react-native/no-inline-styles */
+import React, {useContext, useEffect} from 'react';
 import {Button, View, StyleSheet, TouchableOpacity, Text} from 'react-native';
 import {FormContext} from '../form/formcontext';
 
@@ -11,7 +12,7 @@ const SubmitButton = ({onPress, title}) => {
   return (
     <TouchableOpacity
       onPress={handlePress}
-      style={styles.button}
+      style={{...styles.button}}
       activeOpacity={0.9}>
       <Text style={styles.text}>{title}</Text>
     </TouchableOpacity>

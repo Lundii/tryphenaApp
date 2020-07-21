@@ -1,3 +1,4 @@
+import FormInput from './formInput';
 import Input from './input';
 
-export default Input;
+export {FormInput, Input};
