@@ -17,6 +17,16 @@ export const SiteProvider = ({children}) => {
     }));
   }, []);
 
+  const refreshData = useCallback(async () => {
+    const site = await request(
+      `https://tryphena-staging.herokuapp.com/dash/site/${state.siteid}`,
+    );
+    setState(prevState => ({
+      ...prevState,
+      siteDetails: site,
+    }));
+  }, [request, state.siteid]);
+
   useEffect(() => {
     async function getSite() {
       const site = await request(
@@ -36,6 +46,7 @@ export const SiteProvider = ({children}) => {
     <SiteContext.Provider
       value={{
         setSiteId,
+        refreshData,
         siteid: state.siteid,
         siteDetails: state.siteDetails,
       }}>
