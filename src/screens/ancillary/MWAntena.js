@@ -3,53 +3,26 @@ import {
   SafeAreaView,
   FlatList,
   View,
+  ScrollView,
   StyleSheet,
   Modal,
   TouchableOpacity,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/AntDesign';
 import ListCard from '../../components/listcard';
-import {Input} from '../../components/input';
+import {FormInput} from '../../components/input';
 import {BodyText} from '../../components/text';
-import {FloatButton} from '../../components/button';
+import {FloatButton, SubmitButton} from '../../components/button';
+import {Form} from '../../components/form';
 import {VerticalBlank} from '../../components/blank';
-import {Button} from '../../components/button';
 import Section from '../../components/section';
-
-const DATA = [
-  {
-    sn: 1,
-    type: 'Erricsson',
-    leg: 'LEG A',
-  },
-  {
-    sn: 2,
-    type: 'Erricsson',
-    leg: 'LEG B',
-  },
-  {
-    sn: 3,
-    type: 'Erricsson',
-    leg: 'LEG C',
-  },
-  {
-    sn: 4,
-    type: 'Erricsson',
-    leg: 'LEG A',
-  },
-  {
-    sn: 5,
-    type: 'Erricsson',
-    leg: 'LEG B',
-  },
-  {
-    sn: 6,
-    type: 'Erricsson',
-    leg: 'LEG A',
-  },
-];
+import {useFetcher, useSite} from '../../hooks';
+import Details from './details';
 
 const MWAntenna = () => {
+  const {siteid, siteDetails} = useSite();
+  const {mwantennas} = siteDetails.anciliarytables;
+  const {data, request, isLoading, error} = useFetcher('PATCH');
   const [modalVisible, setModalVisible] = useState(false);
   const addAntenna = () => {
     setModalVisible(true);
@@ -59,57 +32,75 @@ const MWAntenna = () => {
     setModalVisible(true);
   };
 
-  const saveAntenna = () => {
+  const handlePress = ({
+    antennatype,
+    leg,
+    installationheight,
+    width,
+    dishdiameter,
+    remark,
+  }) => {
+    // request(
+    //   `https://tryphena-staging.herokuapp.com/dash/site/mwantennas/${siteid}`,
+    //   {
+    //     antennatype,
+    //     leg,
+    //     installationheight,
+    //     width,
+    //     dishdiameter,
+    //     remark,
+    //   },
+    // );
     setModalVisible(false);
   };
-
   return (
     <SafeAreaView style={{flex: 1}}>
       <Modal visible={modalVisible} transparent animationType="slide">
-        <View
-          style={{
-            justifyContent: 'center',
-            alignItems: 'center',
-            padding: 8,
-            flex: 1,
-            backgroundColor: '#F3F3F3e9',
-          }}>
-          <View style={{width: '100%'}}>
+        <View style={styles.modalContainer}>
+          <ScrollView
+            style={{width: '100%'}}
+            contentContainerStyle={{flexGrow: 1, justifyContent: 'center'}}>
             <Section header="Microwave Antenna Data">
-              <View style={{flexDirection: 'row'}}>
-                <View style={{flex: 1}}>
-                  <Input label="Leg" />
+              <Form>
+                <View>
+                  <FormInput label="Antenna Type" field="antennatype" />
                 </View>
-                <VerticalBlank />
-                <View style={{flex: 1}}>
-                  <Input label="Inst.. Height" />
+                <View>
+                  <FormInput label="Leg" field="leg" />
                 </View>
-              </View>
-              <View style={{flexDirection: 'row'}}>
-                <View style={{flex: 1}}>
-                  <Input label="Width" />
+                <View>
+                  <FormInput
+                    label="Installation Height"
+                    field="installationheight"
+                  />
                 </View>
-                <VerticalBlank />
-                <View style={{flex: 1}}>
-                  <Input label="Dish Diameter" />
+                <View>
+                  <FormInput label="Width" field="width" />
                 </View>
-              </View>
-              <Input
-                label="Remark"
-                multiLine={true}
-                numberOfLines={3}
-                textAlignVertical="top"
-              />
-              <Button title="Save" onPress={saveAntenna} />
+                <View>
+                  <FormInput label="Dish Diameter" field="dishdiameter" />
+                </View>
+                <FormInput
+                  label="Remark"
+                  field="remark"
+                  multiLine={true}
+                  numberOfLines={3}
+                  textAlignVertical="top"
+                />
+                <SubmitButton title="Save" onPress={handlePress} />
+              </Form>
             </Section>
-          </View>
+          </ScrollView>
         </View>
       </Modal>
       <View>
         <FlatList
-          data={DATA}
-          renderItem={({item}) => (
-            <ListCard sn={item.sn} title={item.type} description={item.leg}>
+          data={mwantennas || []}
+          renderItem={({item, index}) => (
+            <ListCard
+              sn={index + 1}
+              title={item.antennatype}
+              description={`Leg ${item.leg}`}>
               <View style={styles.details}>
                 <TouchableOpacity onPress={editAntenna}>
                   <Icon
@@ -119,14 +110,13 @@ const MWAntenna = () => {
                     style={{alignSelf: 'flex-end'}}
                   />
                 </TouchableOpacity>
-                <BodyText>Width: </BodyText>
-                <BodyText>Dish Diameter: </BodyText>
-                <BodyText>Installation height: </BodyText>
-                <Input
-                  label="Remark"
-                  multiLine={true}
-                  numberOfLines={2}
-                  textAlignVertical="top"
+                <Details
+                  detailList={[
+                    {'Installation Height': item.installationheight},
+                    {'Dish Diameter': item.dishdiameter},
+                    {Width: item.width},
+                    {Remark: item.remark},
+                  ]}
                 />
               </View>
             </ListCard>
@@ -143,8 +133,13 @@ const styles = StyleSheet.create({
   details: {
     backgroundColor: 'white',
     padding: 8,
-    paddingLeft: 64,
-    paddingRight: 24,
+  },
+  modalContainer: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 8,
+    flex: 1,
+    backgroundColor: '#F3F3F3e9',
   },
 });
 export default MWAntenna;

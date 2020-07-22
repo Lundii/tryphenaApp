@@ -1,11 +1,17 @@
-import React from 'react';
+import React, {useContext, useEffect} from 'react';
 import MatIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import {View, StyleSheet} from 'react-native';
 import Card from './card';
+import {useSite} from '../../hooks';
 import {BodyText} from '../../components/text';
 
 const SiteCards = ({route, navigation}) => {
-  const {siteid, address} = route.params;
+  const {_id, siteid, address} = route.params;
+  const {setSiteId} = useSite();
+
+  useEffect(() => {
+    setSiteId(_id);
+  }, [setSiteId, _id]);
   return (
     <View style={styles.container}>
       <View style={styles.details}>
@@ -55,7 +61,11 @@ const SiteCards = ({route, navigation}) => {
           />
         </Card>
         <BlankElement />
-        <Card title="Ancillaries table" navigation={navigation} to="Anciliary">
+        <Card
+          title="Ancillaries table"
+          navigation={navigation}
+          to="Anciliary"
+          params={route.params}>
           <MatIcon name="format-columns" size={40} color="#FF6666" />
         </Card>
       </View>

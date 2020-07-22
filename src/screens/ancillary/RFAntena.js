@@ -3,54 +3,26 @@ import {
   SafeAreaView,
   FlatList,
   View,
+  ScrollView,
   StyleSheet,
   Modal,
   TouchableOpacity,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/AntDesign';
 import ListCard from '../../components/listcard';
-import {Input} from '../../components/input';
-import {BodyText} from '../../components/text';
-import {FloatButton} from '../../components/button';
+import {FormInput} from '../../components/input';
+import {Form} from '../../components/form';
+import {FloatButton, SubmitButton} from '../../components/button';
 import {VerticalBlank} from '../../components/blank';
-import {Button} from '../../components/button';
 import Section from '../../components/section';
+import {useFetcher, useSite} from '../../hooks';
+import Details from './details';
 
-const DATA = [
-  {
-    sn: 1,
-    type: 'Faded',
-    leg: 'LEG A',
-  },
-  {
-    sn: 2,
-    type: 'Faded',
-    leg: 'LEG B',
-  },
-  {
-    sn: 3,
-    type: 'Faded',
-    leg: 'LEG C',
-  },
-  {
-    sn: 4,
-    type: 'Faded',
-    leg: 'LEG A',
-  },
-  {
-    sn: 5,
-    type: 'Faded',
-    leg: 'LEG B',
-  },
-  {
-    sn: 6,
-    type: 'Faded',
-    leg: 'LEG A',
-  },
-];
-
-const RFAntenna = () => {
+const RFAntenna = ({route}) => {
+  const {siteid, siteDetails} = useSite();
+  const {rfantennas} = siteDetails.anciliarytables;
   const [modalVisible, setModalVisible] = useState(false);
+  const {data, request, isLoading, error} = useFetcher('PATCH');
   const addAntenna = () => {
     setModalVisible(true);
   };
@@ -58,60 +30,83 @@ const RFAntenna = () => {
   const editAntenna = () => {
     setModalVisible(true);
   };
-  const saveAntenna = () => {
+
+  const handlePress = ({
+    leg,
+    installationheight,
+    length,
+    breadth,
+    width,
+    remark,
+    antennatype,
+  }) => {
+    // request(
+    //   `https://tryphena-staging.herokuapp.com/dash/site/rfantennas/${siteid}`,
+    //   {
+    //     leg,
+    //     installationheight,
+    //     length,
+    //     breadth,
+    //     width,
+    //     remark,
+    //     antennatype,
+    //   },
+    // );
     setModalVisible(false);
   };
   return (
     <SafeAreaView style={{flex: 1}}>
       <Modal visible={modalVisible} transparent animationType="slide">
-        <View
-          style={{
-            justifyContent: 'center',
-            alignItems: 'center',
-            padding: 8,
-            flex: 1,
-            backgroundColor: '#F3F3F3e9',
-          }}>
-          <View style={{width: '100%'}}>
+        <View style={styles.modalContainer}>
+          <ScrollView
+            style={{width: '100%'}}
+            contentContainerStyle={{flexGrow: 1, justifyContent: 'center'}}>
             <Section header="RFAntena Data">
-              <View style={{flexDirection: 'row'}}>
-                <View style={{flex: 1}}>
-                  <Input label="Leg" />
+              <Form>
+                <View>
+                  <FormInput label="Antenna Type" field="antennatype" />
+                </View>
+                <View>
+                  <FormInput label="Leg" field="leg" />
+                </View>
+                <View>
+                  <FormInput
+                    label="Installation Height"
+                    field="installationheight"
+                  />
+                </View>
+                <View>
+                  <FormInput label="Length" field="length" />
                 </View>
                 <VerticalBlank />
-                <View style={{flex: 1}}>
-                  <Input label="Inst.. Height" />
-                </View>
-              </View>
-              <View style={{flexDirection: 'row'}}>
-                <View style={{flex: 1}}>
-                  <Input label="Length" />
+                <View>
+                  <FormInput label="Breadth" field="breadth" />
                 </View>
                 <VerticalBlank />
-                <View style={{flex: 1}}>
-                  <Input label="Breadth" />
+                <View>
+                  <FormInput label="Width" field="width" />
                 </View>
-                <VerticalBlank />
-                <View style={{flex: 1}}>
-                  <Input label="Width" />
-                </View>
-              </View>
-              <Input
-                label="Remark"
-                multiLine={true}
-                numberOfLines={3}
-                textAlignVertical="top"
-              />
-              <Button title="Save" onPress={saveAntenna} />
+                <FormInput
+                  label="Remark"
+                  field="remark"
+                  multiLine={true}
+                  numberOfLines={3}
+                  textAlignVertical="top"
+                />
+                <SubmitButton title="Add" onPress={handlePress} />
+              </Form>
             </Section>
-          </View>
+          </ScrollView>
         </View>
       </Modal>
       <View>
         <FlatList
-          data={DATA}
-          renderItem={({item}) => (
-            <ListCard sn={item.sn} title={item.type} description={item.leg}>
+          data={rfantennas || []}
+          renderItem={({item, index}) => (
+            <ListCard
+              sn={index + 1}
+              title={item.antennatype}
+              description={`Leg ${item.leg}`}>
               <View style={styles.details}>
                 <TouchableOpacity onPress={editAntenna}>
                   <Icon
@@ -121,15 +116,14 @@ const RFAntenna = () => {
                     style={{alignSelf: 'flex-end'}}
                   />
                 </TouchableOpacity>
-                <BodyText>Installation height: </BodyText>
-                <BodyText>Length: </BodyText>
-                <BodyText>Breadth: </BodyText>
-                <BodyText>Width: </BodyText>
-                <Input
-                  label="Remark"
-                  multiLine={true}
-                  numberOfLines={2}
-                  textAlignVertical="top"
+                <Details
+                  detailList={[
+                    {'Installation Height': item.installationheight},
+                    {Breadth: item.breadth},
+                    {Length: item.length},
+                    {Width: item.width},
+                    {Remark: item.remark},
+                  ]}
                 />
               </View>
             </ListCard>
@@ -144,12 +138,18 @@ const RFAntenna = () => {
 const styles = StyleSheet.create({
   details: {
     backgroundColor: 'white',
-    padding: 8,
-    paddingLeft: 64,
-    paddingRight: 24,
+    padding: 12,
+    paddingVertical: 24,
   },
   modal: {
     padding: 16,
+  },
+  modalContainer: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 8,
+    flex: 1,
+    backgroundColor: '#F3F3F3e9',
   },
 });
 export default RFAntenna;

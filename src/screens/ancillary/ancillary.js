@@ -8,7 +8,10 @@ const Tab = createMaterialTopTabNavigator();
 
 const Ancillary = () => {
   return (
-    <Tab.Navigator>
+    <Tab.Navigator
+      tabBarOptions={{
+        labelStyle: {fontFamily: 'Montserrat-SemiBold'},
+      }}>
       <Tab.Screen name="RF Antennas" component={RFAntenna} />
       <Tab.Screen name="Microwave" component={MWAntena} />
     </Tab.Navigator>

@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import {FlatList, View, SafeAreaView, StatusBar, Modal} from 'react-native';
-import Input from '../../components/input';
+import {FormInput} from '../../components/input';
 import ListCard from '../../components/listcard';
 import {FloatButton, SubmitButton} from '../../components/button';
 import Section from '../../components/section';
@@ -32,12 +32,12 @@ const Allsites = ({navigation}) => {
     navigation.navigate('SiteCards', site);
   };
   const handleCreateSite = async ({siteid, address, latitude, longitude}) => {
-    await createRequest('https://tryphena-staging.herokuapp.com/dash/site', {
-      siteid,
-      address,
-      latitude,
-      longitude,
-    });
+    // await createRequest('https://tryphena-staging.herokuapp.com/dash/site', {
+    //   siteid,
+    //   address,
+    //   latitude,
+    //   longitude,
+    // });
     setModalVisible(false);
   };
 
@@ -60,22 +60,22 @@ const Allsites = ({navigation}) => {
           <View style={{width: '100%'}}>
             <Section header="Enter site details">
               <Form>
-                <Input
+                <FormInput
                   label="Site ID"
                   field="siteid"
                   validate={value => (value ? null : 'Site is is required')}
                 />
-                <Input
+                <FormInput
                   label="Address"
                   field="address"
                   validate={value => (value ? null : 'Address is required')}
                 />
-                <Input
+                <FormInput
                   label="Latitude"
                   field="latitude"
                   validate={value => (value ? null : 'Latitude is required')}
                 />
-                <Input
+                <FormInput
                   label="Longitude"
                   field="longitude"
                   validate={value => (value ? null : 'Longitude is required')}
