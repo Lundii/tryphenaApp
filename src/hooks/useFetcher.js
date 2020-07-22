@@ -18,29 +18,53 @@ const useFetcher = type => {
 
   const json = responseData => setData(responseData);
   const request = useCallback(
-    (url, requestData) => {
+    async (url, requestData) => {
       setIsLoading(true);
-      fetch(url, {
-        method: type || 'GET',
-        headers: {
-          Accept: 'application/json',
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify(requestData),
-      })
-        .then(status)
-        .then(json)
-        .catch(responseError => {
-          setIsLoading(false);
-          if (responseError.json) {
-            responseError.json().then(errorMessage => {
-              setError(errorMessage.error);
-            });
-          } else {
-            setError(responseError);
-          }
+      try {
+        const response = await fetch(url, {
+          method: type || 'GET',
+          headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify(requestData),
         });
+        setIsLoading(false);
+        const data = await status(response);
+        json(data);
+        return data;
+      } catch (responseError) {
+        setIsLoading(false);
+        if (responseError.json) {
+          responseError.json().then(errorMessage => {
+            setError(errorMessage.error);
+          });
+        } else {
+          setError(responseError);
+        }
+      }
+      // fetch(url, {
+      //   method: type || 'GET',
+      //   headers: {
+      //     Accept: 'application/json',
+      //     'Content-Type': 'application/json',
+      //     Authorization: `Bearer ${token}`,
+      //   },
+      //   body: JSON.stringify(requestData),
+      // })
+      //   .then(status)
+      //   .then(json)
+      //   .catch(responseError => {
+      //     setIsLoading(false);
+      //     if (responseError.json) {
+      //       responseError.json().then(errorMessage => {
+      //         setError(errorMessage.error);
+      //       });
+      //     } else {
+      //       setError(responseError);
+      //     }
+      //   });
     },
     [token, type],
   );

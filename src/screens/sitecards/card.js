@@ -1,12 +1,21 @@
-import React from 'react';
+import React, {useMemo} from 'react';
 import Icon from 'react-native-vector-icons/Entypo';
 import AntIcon from 'react-native-vector-icons/AntDesign';
 import {View, StyleSheet, TouchableOpacity} from 'react-native';
 import {BodyText} from '../../components/text';
 
-const Card = ({title, navigation, to, children, params}) => {
+const Card = ({title, navigation, to, children, params, screen}) => {
+  const passParams = useMemo(() => {
+    if (screen) {
+      return {
+        screen,
+        params,
+      };
+    }
+    return params;
+  }, [screen, params]);
   const handlePress = () => {
-    navigation.navigate(to, params);
+    navigation.navigate(to, passParams);
   };
 
   return (

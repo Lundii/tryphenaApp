@@ -13,9 +13,6 @@ const Login = ({navigation}) => {
   const [authState, authDispatch] = useContext(AuthContext);
   const {data, request, isLoading, error} = useFetcher('POST');
 
-  // useAutoSubmit(values => {
-  //   console.log(values);
-  // }, 1000);
   const handlePress = ({email, password}) => {
     request('https://tryphena-staging.herokuapp.com/auth/login', {
       email,
@@ -49,12 +46,7 @@ const Login = ({navigation}) => {
               field="password"
               validate={value => (value ? null : 'Password is required')}
             />
-            <SubmitButton
-              title="Login"
-              onPress={handlePress}
-              autoSubmit={handlePress}
-              delayTime={1000}
-            />
+            <SubmitButton title="Login" onPress={handlePress} />
           </Form>
         </Section>
       </View>
