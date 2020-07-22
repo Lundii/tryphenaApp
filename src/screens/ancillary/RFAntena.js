@@ -7,6 +7,7 @@ import {
   StyleSheet,
   Modal,
   TouchableOpacity,
+  ActivityIndicator,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/AntDesign';
 import ListCard from '../../components/listcard';
@@ -19,7 +20,7 @@ import {useFetcher, useSite} from '../../hooks';
 import Details from './details';
 
 const RFAntenna = ({route}) => {
-  const {siteid, siteDetails} = useSite();
+  const {siteid, refreshData, siteDetails} = useSite();
   const {rfantennas} = siteDetails.anciliarytables;
   const [modalVisible, setModalVisible] = useState(false);
   const {data, request, isLoading, error} = useFetcher('PATCH');
@@ -31,7 +32,7 @@ const RFAntenna = ({route}) => {
     setModalVisible(true);
   };
 
-  const handlePress = ({
+  const handlePress = async ({
     leg,
     installationheight,
     length,
@@ -40,18 +41,19 @@ const RFAntenna = ({route}) => {
     remark,
     antennatype,
   }) => {
-    // request(
-    //   `https://tryphena-staging.herokuapp.com/dash/site/rfantennas/${siteid}`,
-    //   {
-    //     leg,
-    //     installationheight,
-    //     length,
-    //     breadth,
-    //     width,
-    //     remark,
-    //     antennatype,
-    //   },
-    // );
+    await request(
+      `https://tryphena-staging.herokuapp.com/dash/site/rfantennas/${siteid}`,
+      {
+        leg,
+        installationheight,
+        length,
+        breadth,
+        width,
+        remark,
+        antennatype,
+      },
+    );
+    refreshData();
     setModalVisible(false);
   };
   return (
@@ -93,7 +95,9 @@ const RFAntenna = ({route}) => {
                   numberOfLines={3}
                   textAlignVertical="top"
                 />
-                <SubmitButton title="Add" onPress={handlePress} />
+                <SubmitButton title="Add" onPress={handlePress}>
+                  {isLoading && <ActivityIndicator color="white" />}
+                </SubmitButton>
               </Form>
             </Section>
           </ScrollView>

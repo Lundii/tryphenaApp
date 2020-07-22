@@ -1,12 +1,14 @@
 import React, {useState, useEffect} from 'react';
-import {View, ImageBackground, StyleSheet, ScrollView} from 'react-native';
-import Input from '../../components/input';
+import {View, StyleSheet, ScrollView} from 'react-native';
+import {FormInput} from '../../components/input';
 import {Form} from '../../components/form';
 import {SubmitButton} from '../../components/button';
 import Section from '../../components/section';
-import {useFetcher} from '../../hooks';
+import {useFetcher, useSite} from '../../hooks';
 
 const SiteDetails = ({route}) => {
+  const {siteDetails} = useSite();
+  const {data, request, isLoading, error} = useFetcher('PUT');
   const {
     _id,
     siteid,
@@ -19,12 +21,9 @@ const SiteDetails = ({route}) => {
     sitedimension,
     stubdimension,
     towerdetails,
-  } = route.params;
-
-  const {data, request, isLoading, error} = useFetcher('PUT');
+  } = siteDetails;
 
   const handlePress = (alldetails = {}) => {
-    console.log(alldetails);
     const {
       columnbreadth,
       columnlength,
@@ -90,15 +89,19 @@ const SiteDetails = ({route}) => {
     <ScrollView>
       <Form>
         <Section header="Basic Site Info">
-          <Input label="Site ID" field="siteid" initialValue={siteid} />
-          <Input label="Date and Time" field="date" initialValue={date} />
-          <Input label="Site Address" field="address" initialValue={address} />
+          <FormInput label="Site ID" field="siteid" initialValue={siteid} />
+          <FormInput label="Date and Time" field="date" initialValue={date} />
+          <FormInput
+            label="Site Address"
+            field="address"
+            initialValue={address}
+          />
           <View
             style={{
               flexDirection: 'row',
             }}>
             <View style={{flex: 1}}>
-              <Input
+              <FormInput
                 label="Latitude"
                 field="latitude"
                 initialValue={latitude}
@@ -106,7 +109,7 @@ const SiteDetails = ({route}) => {
             </View>
             <BlankElement />
             <View style={{flex: 1}}>
-              <Input
+              <FormInput
                 label="Longitude"
                 field="longitude"
                 initialValue={longitude}
@@ -120,7 +123,7 @@ const SiteDetails = ({route}) => {
               flexDirection: 'row',
             }}>
             <View style={{flex: 1}}>
-              <Input
+              <FormInput
                 label="Section"
                 field="stubsection"
                 initialValue={`${(stubdimension && stubdimension.section) ||
@@ -130,7 +133,7 @@ const SiteDetails = ({route}) => {
             </View>
             <BlankElement />
             <View style={{flex: 1}}>
-              <Input
+              <FormInput
                 label="Height"
                 field="stubheight"
                 initialValue={`${(stubdimension && stubdimension.height) ||
@@ -145,7 +148,7 @@ const SiteDetails = ({route}) => {
               flexDirection: 'row',
             }}>
             <View style={{flex: 1}}>
-              <Input
+              <FormInput
                 label="Length"
                 field="sitelength"
                 initialValue={`${(sitedimension && sitedimension.length) ||
@@ -154,7 +157,7 @@ const SiteDetails = ({route}) => {
             </View>
             <BlankElement />
             <View style={{flex: 1}}>
-              <Input
+              <FormInput
                 label="Breadth"
                 field="sitebreadth"
                 initialValue={`${(sitedimension && sitedimension.breadth) ||
@@ -169,7 +172,7 @@ const SiteDetails = ({route}) => {
               flexDirection: 'row',
             }}>
             <View style={{flex: 1}}>
-              <Input
+              <FormInput
                 label="Length"
                 field="platelength"
                 initialValue={`${(baseplatedimension &&
@@ -179,7 +182,7 @@ const SiteDetails = ({route}) => {
             </View>
             <BlankElement />
             <View style={{flex: 1}}>
-              <Input
+              <FormInput
                 label="Breadth"
                 field="platebreadth"
                 initialValue={`${(baseplatedimension &&
@@ -189,7 +192,7 @@ const SiteDetails = ({route}) => {
             </View>
             <BlankElement />
             <View style={{flex: 1}}>
-              <Input
+              <FormInput
                 label="width"
                 field="platewidth"
                 initialValue={`${(baseplatedimension &&
@@ -205,7 +208,7 @@ const SiteDetails = ({route}) => {
               flexDirection: 'row',
             }}>
             <View style={{flex: 1}}>
-              <Input
+              <FormInput
                 label="Length"
                 field="columnlength"
                 initialValue={`${(columndimension && columndimension.length) ||
@@ -214,7 +217,7 @@ const SiteDetails = ({route}) => {
             </View>
             <BlankElement />
             <View style={{flex: 1}}>
-              <Input
+              <FormInput
                 label="Breath"
                 field="columnbreadth"
                 initialValue={`${(columndimension && columndimension.breadth) ||
@@ -223,7 +226,7 @@ const SiteDetails = ({route}) => {
             </View>
             <BlankElement />
             <View style={{flex: 1}}>
-              <Input
+              <FormInput
                 label="Width"
                 field="columnwidth"
                 initialValue={`${(columndimension && columndimension.width) ||
@@ -238,7 +241,7 @@ const SiteDetails = ({route}) => {
               flexDirection: 'row',
             }}>
             <View style={{flex: 1}}>
-              <Input
+              <FormInput
                 label="Tower height"
                 field="towerheight"
                 initialValue={`${(towerdetails && towerdetails.towerheight) ||
@@ -247,15 +250,15 @@ const SiteDetails = ({route}) => {
             </View>
             <BlankElement />
             <View style={{flex: 1}}>
-              <Input
+              <FormInput
                 label="Make/Model"
                 field="towermodel"
                 initialValue={`${(towerdetails && towerdetails.model) || ''}`}
               />
             </View>
           </View>
-          <Input label="Number of tower legs" field="towerlegs" />
-          <Input
+          <FormInput label="Number of tower legs" field="towerlegs" />
+          <FormInput
             label="Tower heel to heel"
             field="towerheeltoheel"
             initialValue={`${(towerdetails && towerdetails.heeltoheel) || ''}`}
@@ -265,7 +268,7 @@ const SiteDetails = ({route}) => {
               flexDirection: 'row',
             }}>
             <View style={{flex: 1}}>
-              <Input
+              <FormInput
                 label="Bottom"
                 field="towerbottom"
                 initialValue={`${(towerdetails && towerdetails.bottom) || ''}`}
@@ -273,7 +276,7 @@ const SiteDetails = ({route}) => {
             </View>
             <BlankElement />
             <View style={{flex: 1}}>
-              <Input
+              <FormInput
                 label="Top"
                 field="towertop"
                 initialValue={`${(towerdetails && towerdetails.top) || ''}`}
@@ -281,7 +284,7 @@ const SiteDetails = ({route}) => {
             </View>
             <BlankElement />
             <View style={{flex: 1}}>
-              <Input
+              <FormInput
                 label="Neck"
                 field="towerneck"
                 initialValue={`${(towerdetails && towerdetails.neck) || ''}`}
