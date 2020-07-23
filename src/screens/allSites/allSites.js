@@ -16,7 +16,6 @@ import {FloatButton, SubmitButton} from '../../components/button';
 import Section from '../../components/section';
 import {Form} from '../../components/form';
 import {useFetcher} from '../../hooks';
-import {BodyText} from '../../components/text';
 
 const validateSiteId = value => {
   const regex = /IHS_[A-Z]{3}_[0-9]{3,4}[A-Z]/;
