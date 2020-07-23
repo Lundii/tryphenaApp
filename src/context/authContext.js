@@ -52,8 +52,8 @@ export const AuthProvider = ({children}) => {
 
       // This will switch to the App screen or Auth screen and this loading
       // screen will be unmounted and thrown away.
-      // await AsyncStorage.clear();
-      authDispatch({type: 'RESTORE TOKEN', token: userToken});
+      await AsyncStorage.clear();
+      authDispatch({type: 'RESTORE TOKEN', token: null});
     };
 
     bootstrapAsync();

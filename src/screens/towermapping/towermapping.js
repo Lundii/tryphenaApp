@@ -13,7 +13,7 @@ const TowerMapping = () => {
               ...styles.column,
               alignItems: 'flex-start',
               paddingVertical: 16,
-              backgroundColor: '#FF6666',
+              backgroundColor: 'white',
               paddingLeft: 16,
             }}>
             <BodyText style={styles.header}>Sec</BodyText>
@@ -40,7 +40,7 @@ const TowerMapping = () => {
               style={{
                 flexDirection: 'row',
                 paddingVertical: 16,
-                backgroundColor: '#FF6666',
+                backgroundColor: 'white',
               }}>
               <View style={styles.column}>
                 <BodyText style={styles.header}>Length</BodyText>
@@ -101,7 +101,7 @@ const styles = StyleSheet.create({
   header: {
     fontFamily: 'Montserrat-SemiBold',
     fontSize: 16,
-    color: 'white',
+    color: 'black',
   },
 });
 

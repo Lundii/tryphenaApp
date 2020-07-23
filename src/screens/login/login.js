@@ -6,6 +6,8 @@ import {
   ScrollView,
   StatusBar,
   ActivityIndicator,
+  TouchableOpacity,
+  Text,
 } from 'react-native';
 import {FormInput} from '../../components/input';
 import {SubmitButton} from '../../components/button';
@@ -14,6 +16,7 @@ import {BodyText} from '../../components/text';
 import {Form, useAutoSubmit} from '../../components/form';
 import {AuthContext} from '../../context/authContext';
 import {useFetcher} from '../../hooks';
+import ImagePicker from 'react-native-image-crop-picker';
 
 const Login = ({navigation}) => {
   const [authState, authDispatch] = useContext(AuthContext);
@@ -36,8 +39,23 @@ const Login = ({navigation}) => {
       authDispatch({type: 'SIGNIN', token: data && data.token});
     }
   }, [data, authDispatch]);
+
+  const takePicture = async () => {
+    ImagePicker.openCamera({
+      width: 300,
+      height: 400,
+      cropping: true,
+    }).then(image => {
+      console.log(image);
+    });
+  };
+
+
   return (
     <View style={styles.container}>
+      {/* <TouchableOpacity onPress={takePicture}>
+        <BodyText>Open camera</BodyText>
+      </TouchableOpacity> */}
       <StatusBar backgroundColor="#E43F3F" />
       <ScrollView
         style={styles.card}

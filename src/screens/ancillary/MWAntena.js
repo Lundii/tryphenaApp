@@ -7,14 +7,14 @@ import {
   StyleSheet,
   Modal,
   TouchableOpacity,
+  ActivityIndicator,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/AntDesign';
+import MatIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import ListCard from '../../components/listcard';
 import {FormInput} from '../../components/input';
-import {BodyText} from '../../components/text';
 import {FloatButton, SubmitButton} from '../../components/button';
 import {Form} from '../../components/form';
-import {VerticalBlank} from '../../components/blank';
 import Section from '../../components/section';
 import {useFetcher, useSite} from '../../hooks';
 import Details from './details';
@@ -30,6 +30,10 @@ const MWAntenna = () => {
 
   const editAntenna = () => {
     setModalVisible(true);
+  };
+
+  const closeModal = () => {
+    setModalVisible(false);
   };
 
   const handlePress = ({
@@ -56,41 +60,50 @@ const MWAntenna = () => {
   return (
     <SafeAreaView style={{flex: 1}}>
       <Modal visible={modalVisible} transparent animationType="slide">
-        <View style={styles.modalContainer}>
-          <ScrollView
-            style={{width: '100%'}}
-            contentContainerStyle={{flexGrow: 1, justifyContent: 'center'}}>
-            <Section header="Microwave Antenna Data">
-              <Form>
-                <View>
-                  <FormInput label="Antenna Type" field="antennatype" />
-                </View>
-                <View>
-                  <FormInput label="Leg" field="leg" />
-                </View>
-                <View>
+        <View style={styles.wrapper}>
+          <TouchableOpacity
+            onPress={closeModal}
+            style={{padding: 16, alignItems: 'flex-end'}}>
+            <MatIcon name="close" size={40} color="black" />
+          </TouchableOpacity>
+          <View style={styles.modalContainer}>
+            <ScrollView
+              style={{width: '100%'}}
+              contentContainerStyle={{flexGrow: 1, justifyContent: 'center'}}>
+              <Section header="Microwave Antenna Data">
+                <Form>
+                  <View>
+                    <FormInput label="Antenna Type" field="antennatype" />
+                  </View>
+                  <View>
+                    <FormInput label="Leg" field="leg" />
+                  </View>
+                  <View>
+                    <FormInput
+                      label="Installation Height"
+                      field="installationheight"
+                    />
+                  </View>
+                  <View>
+                    <FormInput label="Width" field="width" />
+                  </View>
+                  <View>
+                    <FormInput label="Dish Diameter" field="dishdiameter" />
+                  </View>
                   <FormInput
-                    label="Installation Height"
-                    field="installationheight"
+                    label="Remark"
+                    field="remark"
+                    multiLine={true}
+                    numberOfLines={3}
+                    textAlignVertical="top"
                   />
-                </View>
-                <View>
-                  <FormInput label="Width" field="width" />
-                </View>
-                <View>
-                  <FormInput label="Dish Diameter" field="dishdiameter" />
-                </View>
-                <FormInput
-                  label="Remark"
-                  field="remark"
-                  multiLine={true}
-                  numberOfLines={3}
-                  textAlignVertical="top"
-                />
-                <SubmitButton title="Save" onPress={handlePress} />
-              </Form>
-            </Section>
-          </ScrollView>
+                  <SubmitButton title="Save" onPress={handlePress}>
+                    {isLoading && <ActivityIndicator color="white" />}
+                  </SubmitButton>
+                </Form>
+              </Section>
+            </ScrollView>
+          </View>
         </View>
       </Modal>
       <View>
@@ -140,6 +153,10 @@ const styles = StyleSheet.create({
     padding: 8,
     flex: 1,
     backgroundColor: '#F3F3F3e9',
+  },
+  wrapper: {
+    backgroundColor: '#F3F3F3e9',
+    flex: 1,
   },
 });
 export default MWAntenna;
